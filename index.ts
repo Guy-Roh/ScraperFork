@@ -1,9 +1,10 @@
 import * as interfaces from "./interfaces"
 import {Important, Items, Listing} from "./interfaces";
-const request = require('request');
 
 const apiKey : string = "LiO+/mro1pMzUhj6UFJBSQ==qkXaBUvmcUldfHrx";
 let url = "https://www.2dehands.be/lrp/api/search?attributesByKey[]=Language%3Aall-languages&l1CategoryId=820&l2CategoryId=1953&limit=30&offset=30&postcode=2000&searchInTitleAndDescription=true&viewOptions=list-view"
+const latitudeMerksem : number = 51.2512741;
+const longtitudeMerksem: number = 4.448539;
 const fetched = async (): Promise<interfaces.Items> => {
         const response = await fetch(url);
         const data = await response.json();
@@ -35,8 +36,9 @@ const importantData = async(data : Listing[]):Promise<Important[]> => {
         important[i] = {
             title: data[i].title,
             description : data[i].description,
-            price : data[i].priceInfo.priceCents/100,
+            price : `${data[i].priceInfo.priceCents/100} €`,
             cityName : data[i].location.cityName,
+            distance: `${haversineDistance(data[i].location.latitude,data[i].location.longitude)} KM verwijderd van je locatie`,
             dateDay: data[i].date.substring(5,10),
             dateHour: data[i].date.substring(11,16),
             vipUrl : data[i].vipUrl
@@ -51,26 +53,17 @@ const printImportantData = async() => {
     console.log(data);
 }
 
-const CityLongtitudeLatitude = async(cityName : string):Promise<string[]> => {
-    const response = await fetch(`https://api.api-ninjas.com/v1/geocoding?city=${cityName}&country=BE&key=${apiKey}`);
-    const data = await response.json();
-    return data;
+const haversineDistance = (lat: number, lon: number):number => {
+    const R = 6371; // Radius of the Earth in kilometers
+    const dLat = (lat - latitudeMerksem) * (Math.PI / 180);
+    const dLon = (lon - longtitudeMerksem) * (Math.PI / 180);
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(latitudeMerksem * (Math.PI / 180)) * Math.cos(lat * (Math.PI / 180)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = Math.floor(R * c); // Distance in kilometers
+    return distance;
 }
-const PrintCityCoordinates = async() => {
-    let data = await CityLongtitudeLatitude("attenrode");
-    console.log(data);
-}
 
 
-
-var name = 'San Francisco'
-request.get({
-    url: 'https://api.api-ninjas.com/v1/city?name=' + name,
-    headers: {
-        'X-Api-Key': 'YOUR_API_KEY'
-    },
-}, function(error:string, response:string, body:string[]) {
-    if(error) return console.error('Request failed:', error);
-    else if(response.statusCode != 200) return console.error('Error:', response.statusCode, body.toString('utf8'));
-    else console.log(body)
-});
+printImportantData();

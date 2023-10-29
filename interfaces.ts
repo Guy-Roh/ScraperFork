@@ -51,8 +51,9 @@ export interface Picture {
 export interface Important{
     title: string,
     description: string,
-    price: number,
+    price: string,
     cityName: string,
+    distance: string,
     dateDay: string,
     dateHour: string
     vipUrl: string;
