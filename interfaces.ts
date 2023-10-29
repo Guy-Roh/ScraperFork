@@ -48,6 +48,15 @@ export interface Picture {
         height: number;
     };
 }
+export interface Important{
+    title: string,
+    description: string,
+    price: number,
+    cityName: string,
+    dateDay: string,
+    dateHour: string
+    vipUrl: string;
+}
 
 export interface Listing {
     itemId: string;
