@@ -1,8 +1,8 @@
-import {Important} from "./interfaces";
+import {Important} from "./utils/interfaces";
 import axios from "axios";
 require('dotenv').config();
-import {goodValueItems, importantData} from "./transform";
-import {filteredObjects} from "./fetch";
+import {goodValueItems, importantData} from "./utils/transform";
+import {filteredObjects} from "./utils/fetch";
 
 const greenApiUrl : string = `https://api.green-api.com/waInstance${process.env.ID_INSTANCE}/sendMessage/${process.env.API_KEY}`
 const sendWhatsapp = async(items : Important[]):Promise<void> => {

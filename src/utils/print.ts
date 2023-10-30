@@ -1,8 +1,9 @@
 import { importantData, specificIphone, goodValueItems } from './transform';
 import { filteredObjects } from './fetch';
+
+let gefilterdeObjects = filteredObjects();
 export const logFilteredData = async() => {
-    let data = await filteredObjects();
-    console.log(data);
+    console.log(await gefilterdeObjects);
 }
 
 export const printImportantData = async() => {
