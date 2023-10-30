@@ -51,12 +51,12 @@ export interface Picture {
 export interface Important{
     title: string,
     description: string,
-    price: string,
+    price: number,
     cityName: string,
-    distance: string,
+    distance: number,
     dateDay: string,
     dateHour: string
-    vipUrl: string;
+    link: string;
 }
 
 export interface Listing {
