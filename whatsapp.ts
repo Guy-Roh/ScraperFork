@@ -1,12 +1,13 @@
 import {Important} from "./interfaces";
 import axios from "axios";
+require('dotenv').config();
 import {goodValueItems, importantData} from "./transform";
 import {filteredObjects} from "./fetch";
 
-const greenApiUrl : string = "https://api.green-api.com/waInstance7103868781/sendMessage/270de7e543a3400598aa429fd1cd10854ed72ce1fd5948e795"
+const greenApiUrl : string = `https://api.green-api.com/waInstance${process.env.ID_INSTANCE}/sendMessage/${process.env.API_KEY}`
 const sendWhatsapp = async(items : Important[]):Promise<void> => {
     const payload = {
-        chatId: '32488560338@c.us',
+        chatId: `${process.env.PHONE_NUMBER}@c.us`,
         message: `Een nieuwe zoekertje gevonden dat misschien een koopje zou kunnen zijn: 
         ${items[0].title}, Prijs: ${items[0].price},
         De Afstand tussen jou en de koper is: ${items[0].distance}, 
