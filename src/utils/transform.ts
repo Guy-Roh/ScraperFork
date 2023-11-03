@@ -60,3 +60,6 @@ export const specificIphone = async(importantData: Important[], sortIphone:strin
     }
     return iphonelijst;
 }
+export const firstItem = async(items:Important[]):Promise<Important> => {
+    return items[0]
+}

@@ -11,7 +11,7 @@ export const filteredObjects = async ():Promise<Listing[]> => {
     let data = await fetched();
     let filteredData : interfaces.Listing[] = [];
     for (let i=0;i<data.listings.length;i++) {
-        if (data.listings[i].priorityProduct == "NONE") {
+        if (data.listings[i].priorityProduct == "NONE" && !data.listings[i].sellerInformation.showWebsiteUrl) {
             filteredData.push(data.listings[i]);
         }
     }

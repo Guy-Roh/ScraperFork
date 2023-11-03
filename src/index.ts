@@ -1,8 +1,8 @@
 import { sendtoWhatsapp } from './whatsapp';
-import {logFilteredData, printGoodValues} from './utils/print';
+import {logFilteredData, printFirstItem, printGoodValues, printImportantData} from './utils/print';
 
 
-logFilteredData();
+printFirstItem();
 
 
 
