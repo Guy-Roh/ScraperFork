@@ -1,9 +1,11 @@
 import * as interfaces from "./interfaces";
 import {Listing} from "./interfaces";
 
-const url = "https://www.2dehands.be/lrp/api/search?attributesByKey[]=Language%3Aall-languages&l1CategoryId=820&l2CategoryId=1953&limit=100&offset=0&postcode=2000&searchInTitleAndDescription=true&viewOptions=list-view";
+const iphoneUrl : string = "https://www.2dehands.be/lrp/api/search?attributesByKey[]=Language%3Aall-languages&l1CategoryId=820&l2CategoryId=1953&limit=100&offset=0&postcode=2000&searchInTitleAndDescription=true&viewOptions=list-view";
+const playstationUrl : string = "https://www.2dehands.be/lrp/api/search?attributesByKey[]=Language%3Anl-BE&l1CategoryId=356&l2CategoryId=2954&limit=100&offset=0&searchInTitleAndDescription=true&sortBy=SORT_INDEX&sortOrder=DECREASING&viewOptions=list-view";
+
 const fetched = async (): Promise<interfaces.Items> => {
-    const response = await fetch(url);
+    const response = await fetch(playstationUrl);
     const data = await response.json();
     return data;
 }
