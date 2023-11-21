@@ -6,6 +6,7 @@ export const importantData = async(data : Listing[]):Promise<Important[]> => {
     let important : Important[] = [];
     for (let i=0;i<data.length;i++) {
         important[i] = {
+            itemId: data[i].itemId,
             title: data[i].title,
             description : data[i].description,
             price : data[i].priceInfo.priceCents/100,

@@ -49,6 +49,7 @@ export interface Picture {
     };
 }
 export interface Important{
+    itemId: string,
     title: string,
     description: string,
     price: number,
